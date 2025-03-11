@@ -1,0 +1,13 @@
+#Tue Mar 11 00:52:06 UTC 2025
+micronaut:
+  application:
+    name: telemetry
+
+datasources:
+  default:
+    url: jdbc:postgresql://localhost:5432/telemetry_db
+    username: telemetry
+    password: telemetry_password
+    db-type: postgres
+    dialect: POSTGRES
+    driver-class-name: org.postgresql.Driver
