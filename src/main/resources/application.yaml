@@ -13,7 +13,7 @@ micronaut:
 
 datasources:
   default:
-    url: jdbc:postgresql://localhost:5432/telemetry_db
+    url: jdbc:postgresql://postgres:5432/telemetry_db
     username: telemetry
     password: telemetry_password
     db-type: postgres

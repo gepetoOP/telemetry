@@ -1,4 +1,17 @@
 services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    container_name: telemetry
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    networks:
+      - local
+
   postgres:
     image: postgres:15
     container_name: postgres_container
@@ -8,8 +21,13 @@ services:
       POSTGRES_USER: telemetry
       POSTGRES_PASSWORD: telemetry_password
       POSTGRES_DB: telemetry_db
+    networks:
+      - local
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
 volumes:
   postgres_data:
+
+networks:
+  local:
