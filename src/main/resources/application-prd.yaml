@@ -1,0 +1,30 @@
+#Tue Mar 11 00:52:06 UTC 2025
+micronaut:
+  application:
+    name: telemetry
+  router:
+    static-resources:
+      swagger:
+        paths: classpath:META-INF/swagger
+        mapping: /swagger/**
+      swagger-ui:
+        mapping: /swagger-ui/**
+        paths: classpath:META-INF/swagger/views/swagger-ui
+
+otel:
+  service:
+    name: telemetry
+  traces:
+    exporter: otlp
+  exporter:
+    otlp:
+      endpoint: http://otel-collector:4318
+
+datasources:
+  default:
+    url: jdbc:postgresql://postgres:5432/telemetry_db
+    username: telemetry
+    password: telemetry_password
+    db-type: postgres
+    dialect: POSTGRES
+    driver-class-name: org.postgresql.Driver
