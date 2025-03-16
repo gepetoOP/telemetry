@@ -34,6 +34,8 @@ services:
   prometheus:
     image: prom/prometheus:latest
     container_name: prometheus
+    ports:
+      - "9090:9090"
     command:
       - --web.console.templates=/etc/prometheus/consoles
       - --web.console.libraries=/etc/prometheus/console_libraries
@@ -51,19 +53,17 @@ services:
         limits:
           memory: 300M
     restart: unless-stopped
-    ports:
-      - "9090:9090"
 
   grafana:
     image: grafana/grafana:latest
     container_name: grafana
+    ports:
+      - "3000:3000"
     deploy:
       resources:
         limits:
           memory: 120M
     restart: unless-stopped
-    ports:
-      - "3000:3000"
 
   jaeger:
     image: jaegertracing/all-in-one:latest
