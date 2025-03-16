@@ -7,6 +7,9 @@ import com.telemetry.infra.entrypoint.model.TransactionResponse;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 import io.opentelemetry.api.OpenTelemetry;
+import io.opentelemetry.api.metrics.LongCounter;
+import io.opentelemetry.api.metrics.LongCounterBuilder;
+import io.opentelemetry.api.metrics.Meter;
 import io.opentelemetry.api.trace.StatusCode;
 import io.opentelemetry.api.trace.Tracer;
 import io.swagger.v3.oas.annotations.Operation;
@@ -23,6 +26,8 @@ import java.util.UUID;
 public class TransactionController {
     @Inject
     private OpenTelemetry openTelemetry;
+    @Inject
+    private LongCounter counter;
     @Inject
     private TransactionService transactionService;
     @Inject
@@ -41,6 +46,10 @@ public class TransactionController {
 
         teste.end();
 
-        return transactionMapper.toTransactionResponse(transactionService.getTransactions());
+        var response = transactionService.getTransactions();
+
+        counter.add(1);
+
+        return transactionMapper.toTransactionResponse(response);
     }
 }
