@@ -11,9 +11,18 @@ micronaut:
         mapping: /swagger-ui/**
         paths: classpath:META-INF/swagger/views/swagger-ui
 
+otel:
+  service:
+    name: telemetry
+  traces:
+    exporter: otlp
+  exporter:
+    otlp:
+      endpoint: http://localhost:4318
+
 datasources:
   default:
-    url: jdbc:postgresql://postgres:5432/telemetry_db
+    url: jdbc:postgresql://localhost:5432/telemetry_db
     username: telemetry
     password: telemetry_password
     db-type: postgres

@@ -1,16 +1,15 @@
 services:
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
-    container_name: telemetry
-    restart: unless-stopped
-    depends_on:
-      - postgres
-    networks:
-      - local
+#  app:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    ports:
+#      - "8080:8080"
+#    container_name: telemetry
+#    restart: unless-stopped
+#    depends_on:
+#      - postgres
+#      - jaeger
 
   postgres:
     image: postgres:15
@@ -21,13 +20,29 @@ services:
       POSTGRES_USER: telemetry
       POSTGRES_PASSWORD: telemetry_password
       POSTGRES_DB: telemetry_db
-    networks:
-      - local
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    container_name: jaeger
+    ports:
+      - "16686:16686"  # UI do Jaeger
+      - "14250:14250"  # Endpoint para receber traces do OTLP
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
+
+  otel-collector:
+    image: otel/opentelemetry-collector:latest
+    container_name: otel-collector
+    ports:
+      - "4317:4317"  # OTLP gRPC endpoint
+      - "4318:4318"  # OTLP gRPC endpoint
+    volumes:
+      - ./otel-collector/otel-collector-config.yaml:/etc/otel-collector-config.yaml
+    command: [ "--config=/etc/otel-collector-config.yaml" ]
+    depends_on:
+      - jaeger
+
 volumes:
   postgres_data:
-
-networks:
-  local:
