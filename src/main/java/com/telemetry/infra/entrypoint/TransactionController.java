@@ -1,5 +1,9 @@
 package com.telemetry.infra.entrypoint;
 
+import com.telemetry.domain.Transaction;
+import com.telemetry.domain.TransactionService;
+import com.telemetry.infra.entrypoint.mapper.TransactionMapper;
+import com.telemetry.infra.entrypoint.model.TransactionResponse;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 import io.opentelemetry.api.OpenTelemetry;
@@ -10,15 +14,24 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.inject.Inject;
 
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.UUID;
+
 @Controller
 @Tag(name = "Transactions", description = "Transactions management")
 public class TransactionController {
     @Inject
     private OpenTelemetry openTelemetry;
+    @Inject
+    private TransactionService transactionService;
+    @Inject
+    private TransactionMapper transactionMapper;
+
     @Operation(summary = "Lists all transactions", description = "Returns a list of all transactions")
     @ApiResponse(responseCode = "200", description = "Transaction list returned successfully")
     @Get("/transactions")
-    public String getTransactions() {
+    public List<TransactionResponse> getTransactions() {
         Tracer tracer = openTelemetry.getTracer("io.opentelemetry.example");
 
         var teste = tracer.spanBuilder("exampleSpan").startSpan();
@@ -28,6 +41,6 @@ public class TransactionController {
 
         teste.end();
 
-        return "Lista de usuários";
+        return transactionMapper.toTransactionResponse(transactionService.getTransactions());
     }
 }
