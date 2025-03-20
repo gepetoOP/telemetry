@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.inject.Inject;
 
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @Tag(name = "Transactions", description = "Transactions management")
@@ -27,7 +28,7 @@ public class TransactionController {
     @ApiResponse(responseCode = "200", description = "Transaction list returned successfully")
     @Get("/transactions")
     public List<TransactionResponse> getTransactions() {
-        var response = transactionService.getTransactions();
+        var response = transactionService.getTransactions(UUID.randomUUID().toString());
 
         counter.add(1);
 
