@@ -1,41 +1,15 @@
-## Micronaut 4.7.6 Documentation
+Variáveis de ambiente:
 
-- [User Guide](https://docs.micronaut.io/4.7.6/guide/index.html)
-- [API Reference](https://docs.micronaut.io/4.7.6/api/index.html)
-- [Configuration Reference](https://docs.micronaut.io/4.7.6/guide/configurationreference.html)
-- [Micronaut Guides](https://guides.micronaut.io/index.html)
----
+- OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4317;OTEL_EXPORTER_OTLP_PROTOCOL=grpc;OTEL_SERVICE_NAME=telemetry;OTEL_TRACES_EXPORTER=otlp
+- Com agent: JAVA_TOOL_OPTIONS=-javaagent:opentelemetry-javaagent.jar
 
-- [Micronaut Maven Plugin documentation](https://micronaut-projects.github.io/micronaut-maven-plugin/latest/)
-## Feature maven-enforcer-plugin documentation
+Como rodar o projeto:
+- Local:
+  - docker-compose -f (sobe todos os containers)
+  - ./mvnw clean install (roda a aplicação)
+- PRD:
+  - docker-compose -f docker-compose-prd.yml up --build
 
-- [https://maven.apache.org/enforcer/maven-enforcer-plugin/](https://maven.apache.org/enforcer/maven-enforcer-plugin/)
-
-
-## Feature serialization-jackson documentation
-
-- [Micronaut Serialization Jackson Core documentation](https://micronaut-projects.github.io/micronaut-serialization/latest/guide/)
-
-
-## Feature micronaut-aot documentation
-
-- [Micronaut AOT documentation](https://micronaut-projects.github.io/micronaut-aot/latest/guide/)
-
-
-## Feature test-resources documentation
-
-- [Micronaut Test Resources documentation](https://micronaut-projects.github.io/micronaut-test-resources/latest/guide/)
-
-
-## Feature openapi documentation
-
-- [Micronaut OpenAPI Support documentation](https://micronaut-projects.github.io/micronaut-openapi/latest/guide/index.html)
-
-- [https://www.openapis.org](https://www.openapis.org)
-
-
-## Feature jdbc-hikari documentation
-
-- [Micronaut Hikari JDBC Connection Pool documentation](https://micronaut-projects.github.io/micronaut-sql/latest/guide/index.html#jdbc)
-
-
+- Jaegger (http://localhost:16686/)
+- Grafana (http://localhost:3000/ user=admin, pass=admin)
+- Prometheus (http://localhost:9090/)

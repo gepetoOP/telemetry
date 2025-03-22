@@ -3,6 +3,7 @@ package com.telemetry.module;
 import io.micronaut.context.annotation.Factory;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.context.annotation.Value;
+import io.opentelemetry.api.GlobalOpenTelemetry;
 import io.opentelemetry.api.OpenTelemetry;
 import io.opentelemetry.api.metrics.LongCounter;
 import io.opentelemetry.api.metrics.Meter;
@@ -21,7 +22,7 @@ public class OpenTelemetryModule {
     @Singleton
     @Requires(classes = OpenTelemetry.class)
     public Meter initMeter(OpenTelemetry openTelemetry, @Value("${micronaut.application.name}") String applicationName) {
-        return openTelemetry.getMeter(applicationName);
+        return GlobalOpenTelemetry.getMeter(applicationName);
     }
 
     @Singleton
@@ -33,6 +34,6 @@ public class OpenTelemetryModule {
     @Singleton
     @Requires(classes = OpenTelemetry.class)
     public Tracer initTracer(OpenTelemetry openTelemetry, @Value("${micronaut.application.name}") String applicationName) {
-        return openTelemetry.getTracer(applicationName);
+        return GlobalOpenTelemetry.getTracer(applicationName);
     }
 }

@@ -7,12 +7,15 @@ services:
       - "8080:8080"
     container_name: telemetry
     environment:
-      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4318
-      - OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf
+      - JAVA_TOOL_OPTIONS=-javaagent:/app/opentelemetry-javaagent.jar
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
+      - OTEL_EXPORTER_OTLP_PROTOCOL=grpc
       - OTEL_SERVICE_NAME=telemetry
       - OTEL_TRACES_EXPORTER=otlp
       - MICRONAUT_ENVIRONMENTS=prd
     restart: unless-stopped
+    volumes:
+      - ./opentelemetry-javaagent.jar:/app/opentelemetry-javaagent.jar
     depends_on:
       - postgres
       - jaeger

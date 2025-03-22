@@ -6,6 +6,7 @@ import com.telemetry.infra.entrypoint.model.TransactionResponse;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 import io.opentelemetry.api.metrics.LongCounter;
+import io.opentelemetry.instrumentation.annotations.WithSpan;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -27,6 +28,7 @@ public class TransactionController {
     @Operation(summary = "Lists all transactions", description = "Returns a list of all transactions")
     @ApiResponse(responseCode = "200", description = "Transaction list returned successfully")
     @Get("/transactions")
+    @WithSpan
     public List<TransactionResponse> getTransactions() {
         var response = transactionService.getTransactions(UUID.randomUUID().toString());
 
