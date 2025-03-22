@@ -10,7 +10,6 @@ import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.Post;
 import io.micronaut.http.annotation.QueryValue;
-import io.opentelemetry.api.metrics.LongCounter;
 import io.opentelemetry.instrumentation.annotations.WithSpan;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -23,8 +22,6 @@ import java.util.List;
 @Tag(name = "Transactions", description = "Transactions management")
 public class TransactionController {
     @Inject
-    private LongCounter counter;
-    @Inject
     private TransactionService transactionService;
     @Inject
     private TransactionMapper transactionMapper;
@@ -35,8 +32,6 @@ public class TransactionController {
     @WithSpan
     public List<TransactionResponse> getTransactions(@QueryValue("customerUuid") String customerUuid) {
         var response = transactionService.getTransactions(customerUuid);
-
-        counter.add(1);
 
         return transactionMapper.toTransactionResponse(response);
     }
