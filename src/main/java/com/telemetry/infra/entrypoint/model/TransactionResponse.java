@@ -17,6 +17,7 @@ import java.time.LocalDateTime;
 public class TransactionResponse {
     private BigDecimal amount;
     private String customerUuid;
+    private String uuid;
     private LocalDateTime operationDate;
 }
 

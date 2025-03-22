@@ -24,4 +24,6 @@ public class TransactionEntity {
     private LocalDateTime operationDate;
     @Column(name = "customer_uuid")
     private UUID customerUuid;
+    @Column(name = "transaction_uuid", insertable = false)
+    private UUID uuid;
 }
