@@ -1,6 +1,5 @@
 package com.telemetry.infra.repository.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.micronaut.serde.annotation.Serdeable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
