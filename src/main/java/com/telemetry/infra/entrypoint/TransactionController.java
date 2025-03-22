@@ -9,6 +9,7 @@ import io.micronaut.http.annotation.Body;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.Post;
+import io.micronaut.http.annotation.QueryValue;
 import io.opentelemetry.api.metrics.LongCounter;
 import io.opentelemetry.instrumentation.annotations.WithSpan;
 import io.swagger.v3.oas.annotations.Operation;
@@ -32,8 +33,8 @@ public class TransactionController {
     @ApiResponse(responseCode = "200", description = "Transaction list returned successfully")
     @Get("/transactions")
     @WithSpan
-    public List<TransactionResponse> getTransactions() {
-        var response = transactionService.getTransactions("ceb9f67b-2224-44ba-a16f-f07bef7f3727");
+    public List<TransactionResponse> getTransactions(@QueryValue("customerUuid") String customerUuid) {
+        var response = transactionService.getTransactions(customerUuid);
 
         counter.add(1);
 
