@@ -1,6 +1,6 @@
 package com.telemetry.infra.entrypoint.mapper;
 
-import com.telemetry.domain.Transaction;
+import com.telemetry.domain.model.Transaction;
 import com.telemetry.infra.entrypoint.model.TransactionResponse;
 import org.mapstruct.Mapper;
 

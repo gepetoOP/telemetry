@@ -1,4 +1,4 @@
-package com.telemetry.domain;
+package com.telemetry.domain.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

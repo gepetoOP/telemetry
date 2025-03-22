@@ -1,6 +1,6 @@
 package com.telemetry.infra.entrypoint;
 
-import com.telemetry.domain.TransactionService;
+import com.telemetry.domain.services.TransactionService;
 import com.telemetry.infra.entrypoint.mapper.TransactionMapper;
 import com.telemetry.infra.entrypoint.model.TransactionResponse;
 import io.micronaut.http.annotation.Controller;

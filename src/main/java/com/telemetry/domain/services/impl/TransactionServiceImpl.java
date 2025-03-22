@@ -1,9 +1,8 @@
-package com.telemetry.domain.impl;
+package com.telemetry.domain.services.impl;
 
-import com.telemetry.annotation.CreateSpan;
 import com.telemetry.annotation.SpanAttributes;
-import com.telemetry.domain.Transaction;
-import com.telemetry.domain.TransactionService;
+import com.telemetry.domain.model.Transaction;
+import com.telemetry.domain.services.TransactionService;
 import jakarta.inject.Singleton;
 
 import java.math.BigDecimal;

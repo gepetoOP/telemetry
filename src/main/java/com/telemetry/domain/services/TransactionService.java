@@ -1,4 +1,6 @@
-package com.telemetry.domain;
+package com.telemetry.domain.services;
+
+import com.telemetry.domain.model.Transaction;
 
 import java.util.List;
 
