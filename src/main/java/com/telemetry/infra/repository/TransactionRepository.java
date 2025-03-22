@@ -6,4 +6,5 @@ import io.micronaut.data.jpa.repository.JpaRepository;
 
 @Repository
 public interface TransactionRepository extends JpaRepository<TransactionEntity, Long> {
+//    List<TransactionEntity> findByCustomerUuid(UUID customerUuid);
 }

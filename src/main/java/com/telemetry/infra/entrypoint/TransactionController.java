@@ -46,6 +46,6 @@ public class TransactionController {
     @Post("/transactions")
     @WithSpan
     public TransactionEntity saveTransactions(@Body CreateTransactionRequest request) {
-        return transactionService.saveTransaction(request.getAmount());
+        return transactionService.saveTransaction(request.getAmount(), request.getCustomerUuid());
     }
 }

@@ -17,9 +17,10 @@ public class TransactionServiceImpl implements TransactionService {
     @Inject
     private TransactionRepository transactionRepository;
 
-    public TransactionEntity saveTransaction(BigDecimal amount) {
+    public TransactionEntity saveTransaction(BigDecimal amount, String customerUuid) {
         var entity = new TransactionEntity();
         entity.setAmount(amount);
+        entity.setCustomerUuid(UUID.fromString(customerUuid));
 
         return transactionRepository.save(entity);
     }

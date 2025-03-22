@@ -10,6 +10,7 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Data
 @Entity(name = "telemetry_transactions")
@@ -21,4 +22,6 @@ public class TransactionEntity {
     private BigDecimal amount;
     @Column(name = "operation_date", insertable = false)
     private LocalDateTime operationDate;
+    @Column(name = "customer_uuid")
+    private UUID customerUuid;
 }

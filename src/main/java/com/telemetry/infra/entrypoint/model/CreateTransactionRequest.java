@@ -15,4 +15,5 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class CreateTransactionRequest {
     private BigDecimal amount;
+    private String customerUuid;
 }
