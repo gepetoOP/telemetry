@@ -6,12 +6,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Transaction {
-    private BigDecimal value;
+    private BigDecimal amount;
     private String uuid;
+    private String customerUuid;
+    private LocalDateTime operationDate;
 }

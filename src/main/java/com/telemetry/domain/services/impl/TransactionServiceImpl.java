@@ -1,6 +1,7 @@
 package com.telemetry.domain.services.impl;
 
 import com.telemetry.annotation.SpanAttributes;
+import com.telemetry.domain.mapper.TransactionMapper;
 import com.telemetry.domain.model.Transaction;
 import com.telemetry.domain.services.TransactionService;
 import com.telemetry.infra.repository.TransactionRepository;
@@ -15,6 +16,8 @@ import java.util.UUID;
 @Singleton
 public class TransactionServiceImpl implements TransactionService {
     @Inject
+    private TransactionMapper transactionMapper;
+    @Inject
     private TransactionRepository transactionRepository;
 
     public TransactionEntity saveTransaction(BigDecimal amount, String customerUuid) {
@@ -27,9 +30,8 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public List<Transaction> getTransactions(@SpanAttributes("customer.uuid") String customerUuid) {
-        return List.of(
-                Transaction.builder().uuid(UUID.randomUUID().toString()).value(BigDecimal.TEN).build(),
-                Transaction.builder().uuid(UUID.randomUUID().toString()).value(BigDecimal.TWO).build()
-        );
+        var response = transactionRepository.findByCustomerUuid(UUID.fromString(customerUuid));
+
+        return transactionMapper.toTransactionResponse(response);
     }
 }

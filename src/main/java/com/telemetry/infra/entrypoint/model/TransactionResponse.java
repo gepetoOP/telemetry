@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Serdeable
 @Data
@@ -14,8 +15,9 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TransactionResponse {
-    private BigDecimal value;
-    private String uuid;
+    private BigDecimal amount;
+    private String customerUuid;
+    private LocalDateTime operationDate;
 }
 
 
