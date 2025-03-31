@@ -20,10 +20,10 @@ public class TransactionEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private BigDecimal amount;
-    @Column(name = "operation_date", insertable = false)
+    @Column(name = "operation_date")
     private LocalDateTime operationDate;
     @Column(name = "customer_uuid")
     private UUID customerUuid;
-    @Column(name = "transaction_uuid", insertable = false)
+    @Column(name = "transaction_uuid")
     private UUID uuid;
 }

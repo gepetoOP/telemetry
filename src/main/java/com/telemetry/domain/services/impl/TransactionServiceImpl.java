@@ -11,6 +11,7 @@ import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,6 +28,8 @@ public class TransactionServiceImpl implements TransactionService {
         var entity = new TransactionEntity();
         entity.setAmount(amount);
         entity.setCustomerUuid(UUID.fromString(customerUuid));
+        entity.setUuid(UUID.randomUUID());
+        entity.setOperationDate(LocalDateTime.now());
 
         return transactionRepository.save(entity);
     }
