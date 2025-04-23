@@ -2,6 +2,8 @@
 micronaut:
   application:
     name: telemetry
+  server:
+    port: 8081
   router:
     static-resources:
       swagger:
@@ -10,6 +12,33 @@ micronaut:
       swagger-ui:
         mapping: /swagger-ui/**
         paths: classpath:META-INF/swagger/views/swagger-ui
+    security:
+      authentication: idtoken
+      oauth2:
+        clients:
+          keycloak:
+            client-secret: '${OAUTH_CLIENT_SECRET:2ku82joUYobafwXQpDtd53tDxNyGvUkX}'
+            client-id: '${OAUTH_CLIENT_ID:myclient}'
+            openid:
+              issuer: '${OIDC_ISSUER_DOMAIN:`http://localhost:8080`}/realms/${KEYCLOAK_REALM:myrealm}'
+      endpoints:
+        logout:
+          get-allowed: true
+    #  security:
+#    authentication: bearer
+#    oauth2:
+#      clients:
+#        keycloak:
+#          client-id: myclient
+#          #client-secret: your-client-secret
+#          openid:
+#            issuer: http://localhost:8080/realms/myrealm
+#    token:
+#      jwt:
+#        signatures:
+#          jwks:
+#            keycloak:
+#              url: http://localhost:8080/realms/myrealm/protocol/openid-connect/certs
 
 otel:
   service:
