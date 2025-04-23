@@ -1,5 +1,7 @@
 package com.telemetry.infra.entrypoint;
 
+import com.telemetry.annotation.CreateSpan;
+import com.telemetry.annotation.SpanAttributes;
 import com.telemetry.domain.services.TransactionService;
 import com.telemetry.infra.entrypoint.mapper.TransactionMapper;
 import com.telemetry.infra.entrypoint.model.CreateTransactionRequest;
@@ -29,8 +31,8 @@ public class TransactionController {
     @Operation(summary = "Lists all transactions", description = "Returns a list of all transactions")
     @ApiResponse(responseCode = "200", description = "Transaction list returned successfully")
     @Get("/transactions")
-    @WithSpan
-    public List<TransactionResponse> getTransactions(@QueryValue("customerUuid") String customerUuid) {
+    @CreateSpan
+    public List<TransactionResponse> getTransactions(@SpanAttributes("heuuai") @QueryValue("customerUuid") String customerUuid) {
         var response = transactionService.getTransactions(customerUuid);
 
         return transactionMapper.toTransactionResponse(response);
@@ -39,7 +41,7 @@ public class TransactionController {
     @Operation(summary = "Save a transaction", description = "Saves a transaction")
     @ApiResponse(responseCode = "200", description = "Saved successfully")
     @Post("/transactions")
-    @WithSpan
+    @CreateSpan
     public TransactionEntity saveTransactions(@Body CreateTransactionRequest request) {
         return transactionService.saveTransaction(request.getAmount(), request.getCustomerUuid());
     }
