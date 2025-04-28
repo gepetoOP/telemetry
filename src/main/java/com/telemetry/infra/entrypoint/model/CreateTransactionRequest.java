@@ -1,6 +1,7 @@
 package com.telemetry.infra.entrypoint.model;
 
 import com.telemetry.annotation.SpanAttributes;
+import io.micronaut.core.annotation.Introspected;
 import io.micronaut.serde.annotation.Serdeable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
